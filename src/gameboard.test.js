@@ -12,6 +12,16 @@ test('place ship of size 3 on board at (4,6)',() => {
     testArray[4][3] = 0;
     expect(board.getPlayerState()).toEqual(testArray);
 });
+test('move placed ship size 3 on board at (4,4)',() => {
+    let board = gameboard(10, 10);
+    let testArray = Array.from({length: 10}, _ =>new Array(10).fill(null));
+    board.placeShip(3, 4, 1, 'vertical');
+    board.moveShip(3, 4, 1, 'vertical', 4, 4);
+    testArray[4][4] = 0;
+    testArray[4][5] = 0;
+    testArray[4][6] = 0;
+    expect(board.getPlayerState()).toEqual(testArray);
+});
 test('do not place ship if it does not fit on board',() => {
     let board = gameboard(10, 10);
     let testArray = Array.from({length: 10}, _ =>new Array(10).fill(null));
@@ -95,6 +105,17 @@ test('not all ships are sunk',() => {
     board.receiveAttack(4, 5);
     board.receiveAttack(4, 6);
     board.receiveAttack(4, 7)
+    
+    expect(board.shipRemaining()).toEqual(true);
+});
+test('place ships randomly',() => {
+    let board = gameboard(10, 10);
+    board.randomizeShipPlacement(4);
+    board.randomizeShipPlacement(5);
+    board.randomizeShipPlacement(3);
+    board.randomizeShipPlacement(3);
+    board.randomizeShipPlacement(2);
+    console.log(board.getPlayerState());
     
     expect(board.shipRemaining()).toEqual(true);
 });

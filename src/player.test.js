@@ -23,7 +23,7 @@ test('Player attacks Opponent and misses',() => {
     let playerTwoboard = gameboard(10, 10);
     let playerOne = player(playerOneBoard, playerTwoboard);
     playerOne.setTurn(true);
-    expect(playerOne.makeAttack(1, 1)).toBe('Miss');
+    expect(playerOne.makeAttack(1, 1).outcome).toBe('Miss');
 });
 test('Player attacks Opponent and hits',() => {
     let playerOneBoard = gameboard(10, 10);
@@ -31,14 +31,14 @@ test('Player attacks Opponent and hits',() => {
     playerTwoboard.placeShip(3, 1, 1, 'vertical');
     let playerOne = player(playerOneBoard, playerTwoboard);
     playerOne.setTurn(true);
-    expect(playerOne.makeAttack(1, 1)).toBe('Hit');
+    expect(playerOne.makeAttack(1, 1).outcome).toBe('Hit');
 });
 test('AI attack and miss',() => {
     let playerOneBoard = gameboard(10, 10);
     let playerTwoboard = gameboard(10, 10);
     let playerOne = player(playerOneBoard, playerTwoboard, true);
     playerOne.setTurn(true);
-    expect(playerOne.makeAttack()).toBe('Miss');
+    expect(playerOne.makeAttack().outcome).toBe('Miss');
 });
 test('AI attack and hit',() => {
     let playerOneBoard = gameboard(10, 10);
@@ -55,5 +55,5 @@ test('AI attack and hit',() => {
     playerTwoboard.placeShip(10, 8, 0, 'vertical');
     playerTwoboard.placeShip(10, 9, 0, 'vertical');
     playerOne.setTurn(true);
-    expect(playerOne.makeAttack()).toBe('Hit');
+    expect(playerOne.makeAttack().outcome).toBe('Hit');
 });
